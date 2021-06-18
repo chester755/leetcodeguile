@@ -68,5 +68,3 @@
     (if (list? nolist)
 	(LISTLength (cdr nolist) (car nolist) 1 1)
 	(format #t "Sorry wrong input~%"))))
-	
-	
