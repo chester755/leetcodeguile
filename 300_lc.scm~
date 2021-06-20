@@ -140,6 +140,7 @@
 	(display (setlist sublist halfpoint value))
 					;(list-set! sublist halfpoint value)
 	(setlist sublist halfpoint value)
+	(sublist)
 	);(replace-n orglist firstlist secondlist value 0 halfpoint))
        ((> value (list-ref sublist halfpoint)) (locList sublist value halfpoint endpos))
        ((< value (list-ref sublist halfpoint)) (locList sublist value startpos halfpoint))
