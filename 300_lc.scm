@@ -95,7 +95,10 @@
 (define throughList
   (lambda (orglist sublist)
     (cond
+     ;;Enable first one if you need to see the list contains
      ((null? orglist) sublist)
+     ;;Enable the second one if you only want the length of the list
+     ((null? orglist) (length sublist)
      (else (throughList (cdr orglist) (locList sublist (car orglist) 0 (length sublist)))))))
 
 (define recur-change
@@ -119,25 +122,25 @@
   ;;One of the best way is divide and conqur, so we know the length of the element, and we find the middle and see which partition it is in and keep doing that
   (lambda (sublist value startpos endpos)
     (let ((halfpoint (half startpos endpos)))
-      (display sublist)
-      (format #t "~%")
-      (display halfpoint)
-      (format #t "~%")
-      (display value)
-      (format #t "~%")
+      ;(display sublist)
+      ;(format #t "~%")
+      ;(display halfpoint)
+      ;(format #t "~%")
+      ;(display value)
+      ;(format #t "~%")
       (cond
        ;;First condition if empty list let's fill it
        ((null? sublist) (append sublist (list value)))
        ;;Don't do anything if it is bigger than last value
        ((> value (car (reverse sublist))) (append sublist (list value)))
 	;;Second case if it is smaller than first one, let's replace first one
-       ((< value (car sublist)) (setlist sublist 0 value)) ;(replace-n sublist '() sublist value 0 1))
+       ((<= value (car sublist)) (setlist sublist 0 value)) ;(replace-n sublist '() sublist value 0 1))
        ((>= halfpoint (length sublist)) (append sublist (list value)))
 	;;Third case if we found the correct one
-       ((and (< value (list-ref sublist halfpoint))
+       ((and (<= value (list-ref sublist halfpoint))
 	     (> value (list-ref sublist (- halfpoint 1))))
-	(display "I am here")
-	(display (setlist sublist halfpoint value))
+	;(display "I am here")
+	;(display (setlist sublist halfpoint value))
 					;(list-set! sublist halfpoint value)
 	(setlist sublist halfpoint value)
 	);(replace-n orglist firstlist secondlist value 0 halfpoint))
